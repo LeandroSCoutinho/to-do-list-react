@@ -2,6 +2,9 @@ import { useState } from 'react';
 
 import './App.css';
 
+import Todo from './components/todo';
+import TodoForm from './components/TodoForm';
+
 function App() {
   const [todos, setTodos] = useState([
     {
@@ -24,25 +27,41 @@ function App() {
     },
   ]);
 
+  const addTodo = (text, category) => {
+      const newTodos = [
+        ...todos,
+        {
+          id: Math.floor(Math.random() * 10000),
+          text,
+          category,
+          isComplete: false,
+        }
+      ];
+      setTodos(newTodos)
+  };
+
+  const deleteTodo = (id) => {
+    console.log("Chamada de função");
+      const newTodos = [...todos];
+      const filteredTodos = newTodos.filter((todo) => 
+        todo.id !== id ? todo : null
+      
+      );
+      setTodos(filteredTodos);
+      
+  };
+
   return (
-    <div className="app">
+    <div className="app"> 
+
       <h1>To Do List</h1>
+
       <div className="todo-list">
-       {todos.map((todo) => (
-        <div className="todo">
-          <div className="content">
-            <p>{todo.text}</p>
-            <p className="category">
-              ({todo.category})
-            </p>
-          </div>
-          <div>
-            <button>Finalizar</button>
-            <button>Ecluir</button>
-          </div>
-        </div>
-       ))}
+        {todos.map((todo) => (
+          <Todo key={todo.id} todo={todo} deleteTodo={deleteTodo} />
+        ))}
       </div>
+      <TodoForm  addTodo={addTodo}/>
     </div>
   )
 }
