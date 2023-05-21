@@ -4,6 +4,7 @@ import './App.css';
 
 import Todo from './components/todo';
 import TodoForm from './components/TodoForm';
+import Search from './components/Search';
 
 function App() {
   const [todos, setTodos] = useState([
@@ -26,6 +27,7 @@ function App() {
       isFinalized: false,
     },
   ]);
+  const [search, setSearch] = useState("");
 
   const addTodo = (text, category) => {
       const newTodos = [
@@ -62,8 +64,14 @@ function App() {
 
       <h1>To Do List</h1>
 
+      <Search search={search} setSearch={setSearch}/>
+
       <div className="todo-list">
-        {todos.map((todo) => (
+        {todos
+        .filter((todo) => (
+          todo.text.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+        ))
+        .map((todo) => (
           <Todo key={todo.id} todo={todo} deleteTodo={deleteTodo} finalizeTodo={finalizeTodo} />
         ))}
       </div>
