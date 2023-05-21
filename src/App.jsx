@@ -11,19 +11,19 @@ function App() {
       id: 1,
       text: "Criar funcional tela de Login",
       category: "Trabalho",
-      isComplete: false,
+      isFinalized: false,
     },
     {
       id: 2,
       text: "Correr",
       category: "Pessoal",
-      isComplete: false,
+      isFinalized: false,
     },
     {
       id: 3,
       text: "Estudar NodeJs",
       category: "Estudos",
-      isComplete: false,
+      isFinalized: false,
     },
   ]);
 
@@ -34,22 +34,28 @@ function App() {
           id: Math.floor(Math.random() * 10000),
           text,
           category,
-          isComplete: false,
+          isFinalized: false,
         }
       ];
       setTodos(newTodos)
   };
 
   const deleteTodo = (id) => {
-    console.log("Chamada de função");
       const newTodos = [...todos];
       const filteredTodos = newTodos.filter((todo) => 
         todo.id !== id ? todo : null
       
       );
-      setTodos(filteredTodos);
-      
+      setTodos(filteredTodos); 
   };
+
+  const finalizeTodo = (id) => {
+    const newTodos = [...todos];
+    newTodos.map((todo) => 
+      todo.id == id ? (todo.isFinalized = !todo.isFinalized) : todo
+    );
+    setTodos(newTodos);
+  }
 
   return (
     <div className="app"> 
@@ -58,7 +64,7 @@ function App() {
 
       <div className="todo-list">
         {todos.map((todo) => (
-          <Todo key={todo.id} todo={todo} deleteTodo={deleteTodo} />
+          <Todo key={todo.id} todo={todo} deleteTodo={deleteTodo} finalizeTodo={finalizeTodo} />
         ))}
       </div>
       <TodoForm  addTodo={addTodo}/>

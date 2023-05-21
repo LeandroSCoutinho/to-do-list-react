@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
 
-const Todo = ({todo, deleteTodo}) => {
+const Todo = ({todo, deleteTodo, finalizeTodo}) => {
    
   return (
-    <div className="todo">
+    <div className="todo" 
+      style={{ textDecoration: todo.isFinalized ? "line-through" : ""}}>
           <div className="content">
             <p>{todo.text}</p>
             <p className="category">
@@ -12,12 +13,21 @@ const Todo = ({todo, deleteTodo}) => {
          </div>
 
          <div>
-            <button className='complete'>Finalizar</button>
-            <button className='remove' onClick={() => deleteTodo(todo.id)}>Excluir</button>
+            <button 
+              className='complete' 
+              onClick={() => finalizeTodo(todo.id)}>
+                Finalizar
+            </button>
+
+            <button 
+              className='remove' 
+              onClick={() => deleteTodo(todo.id)}>
+                Excluir
+            </button>
           </div>
           
     </div>
   )
 }
 
-export default Todo
+export default Todo;

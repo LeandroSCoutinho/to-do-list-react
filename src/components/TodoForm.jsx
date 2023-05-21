@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 const TodoForm = ({addTodo}) => {
 
@@ -8,10 +8,9 @@ const TodoForm = ({addTodo}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if(!value || !category) return;
-        addTodo(value, category);
-        
-        setValue("");
-        setCategory("");
+            addTodo(value, category);
+            setValue("");
+            setCategory("");
     };
 
   return (
@@ -38,4 +37,4 @@ const TodoForm = ({addTodo}) => {
   )
 }
 
-export default TodoForm
+export default TodoForm;
