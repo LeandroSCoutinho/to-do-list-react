@@ -5,6 +5,7 @@ import './App.css';
 import Todo from './components/todo';
 import TodoForm from './components/TodoForm';
 import Search from './components/Search';
+import Filter from './components/Filter';
 
 function App() {
   const [todos, setTodos] = useState([
@@ -28,6 +29,9 @@ function App() {
     },
   ]);
   const [search, setSearch] = useState("");
+
+  const [filter, setFilter] = useState("All");
+  const [sort, setSort] = useState("Asc");
 
   const addTodo = (text, category) => {
       const newTodos = [
@@ -59,6 +63,8 @@ function App() {
     setTodos(newTodos);
   }
 
+  
+
   return (
     <div className="app"> 
 
@@ -66,8 +72,17 @@ function App() {
 
       <Search search={search} setSearch={setSearch}/>
 
+      <Filter filter={filter} setFilter={setFilter}/>
+
       <div className="todo-list">
         {todos
+        .filter((todo) => ( 
+          filter === "All" 
+            ? true 
+            : filter === "finalized" 
+            ? todo.isFinalized 
+            : !todo.isFinalized)
+          )
         .filter((todo) => (
           todo.text.toLocaleLowerCase().includes(search.toLocaleLowerCase())
         ))
