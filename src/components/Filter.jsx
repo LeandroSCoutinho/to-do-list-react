@@ -1,11 +1,10 @@
 const Filter = ({filter, setFilter}) => {
   return (
     <div className="filter">
-        <h2>Filter:</h2>
+        <h2>Filter por status:</h2>
 
         <div className="filter-options">
             <div>
-              <p>Status:</p>
               <select value={filter} onChange={(e) => setFilter(e.target.value)}>
                 <option value="All">Todas</option>
                 <option value="finalized">Finalizadas</option>
@@ -15,8 +14,8 @@ const Filter = ({filter, setFilter}) => {
         </div>
         <div>
           <p>Ordem alfabética:</p>
-          <button>Ascendente</button>
-          <button>Decrescente</button>
+          <button onClick={() => setFilter("Asc")}>Ascendente</button>
+          <button onClick={() => setFilter("Desc")}>Decrescente</button>
         </div>
     </div>
   );

@@ -67,30 +67,43 @@ function App() {
 
   return (
     <div className="app"> 
+      <div className="content">
 
-      <h1>To Do List</h1>
+        <h1>To Do List</h1>
 
-      <Search search={search} setSearch={setSearch}/>
+        <Search search={search} setSearch={setSearch}/>
 
-      <Filter filter={filter} setFilter={setFilter}/>
+        <Filter filter={filter} setFilter={setFilter} setSort={setSort}/>
 
-      <div className="todo-list">
-        {todos
-        .filter((todo) => ( 
-          filter === "All" 
-            ? true 
-            : filter === "finalized" 
-            ? todo.isFinalized 
-            : !todo.isFinalized)
+        <div className="todo-list">
+          {todos
+          .filter((todo) => ( 
+            filter === "All" 
+              ? true 
+              : filter === "finalized" 
+              ? todo.isFinalized 
+              : !todo.isFinalized)
+            )
+          .filter((todo) => (
+            todo.text.toLocaleLowerCase()
+            .includes(search.toLocaleLowerCase())
+          ))
+          .sort((a,b) => 
+          sort === "Asc"
+          ? a.text.localeCompare(b.text)
+          :b.text.localeCompare(a.text)
           )
-        .filter((todo) => (
-          todo.text.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-        ))
-        .map((todo) => (
-          <Todo key={todo.id} todo={todo} deleteTodo={deleteTodo} finalizeTodo={finalizeTodo} />
-        ))}
+          .map((todo) => (
+            <Todo 
+              key={todo.id} 
+              todo={todo} 
+              deleteTodo={deleteTodo} 
+              finalizeTodo={finalizeTodo} />
+          ))
+          }
+        </div>
+        <TodoForm  addTodo={addTodo}/>
       </div>
-      <TodoForm  addTodo={addTodo}/>
     </div>
   )
 }
