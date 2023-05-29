@@ -1,9 +1,8 @@
 const Filter = ({filter, setFilter}) => {
   return (
     <div className="filter">
-        <h2>Filter por status:</h2>
-
         <div className="filter-options">
+           <h2>Filter por status:</h2>
             <div>
               <select value={filter} onChange={(e) => setFilter(e.target.value)}>
                 <option value="All">Todas</option>

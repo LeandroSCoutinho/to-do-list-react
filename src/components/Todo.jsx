@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaCheck, FaTrashAlt } from "react-icons/fa";
 
 const Todo = ({todo, deleteTodo, finalizeTodo}) => {
    
@@ -12,17 +13,17 @@ const Todo = ({todo, deleteTodo, finalizeTodo}) => {
             </p>
          </div>
 
-         <div>
+         <div className='btnGroup'>
             <button 
-              className='complete' 
+              className='btnComplete' 
               onClick={() => finalizeTodo(todo.id)}>
-                Finalizar
+                <FaCheck />
             </button>
 
             <button 
-              className='remove' 
+              className='btnRemove' 
               onClick={() => deleteTodo(todo.id)}>
-                Excluir
+                <FaTrashAlt />
             </button>
           </div>
           
